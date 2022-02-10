@@ -76,7 +76,7 @@ const compileSass = () => {
     CSS_DECLARATION_SORTER({ order: 'alphabetical' /* smacss, concentric-css */ })
   ]
 
-  src(GULP_PATHS.SRC_SASS, { sourcemaps: true  /* init */})
+  return src(GULP_PATHS.SRC_SASS, { sourcemaps: true  /* init */})
   .pipe(GULP_PLUMBER({ errorHandler: GULP_NOTIFY.onError('<%= error.message %>') }))
   .pipe(GULP_SASS_BLOB())
   .pipe(GULP_SASS({outputStyle: 'expanded'}))
@@ -90,7 +90,7 @@ const compileSass = () => {
  * Javascript Task
  */
 const compileJs = () => {
-  src(GULP_PATHS.SRC_JS)
+  return src(GULP_PATHS.SRC_JS)
   .pipe(GULP_SOURCEMAPS.init())
   .pipe(GULP_PLUMBER({ errorHandler: GULP_NOTIFY.onError('<%= error.message %>')}))
   .pipe(GULP_BABEL({ presets: ["@babel/preset-env"] }))
@@ -103,18 +103,19 @@ const compileJs = () => {
 /**
  * Watch Static Files
  */
-const watchFiles = () => {
-  watch(GULP_PATHS.ROOT_DIR, browserSyncAbility);
-  watch(GULP_PATHS.SRC_SASS, compileSass);
-  watch(GULP_PATHS.SRC_JS, compileJs);
-}
+const watchBrowserSync = () => watch(GULP_PATHS.ROOT_DIR, browserSyncAbility);
+const watchSassFiles = () => watch(GULP_PATHS.SRC_SASS, compileScss);
+const watchJsFiles = () => watch(GULP_PATHS.SRC_JS, compileJs);
+ 
 
 /**
 * Default Task
 */
 const defaultTask = () => {
-  watchFiles();
-  compileSass();
+  watchBrowserSync();
+  watchSassFiles();
+  watchJsFiles();
+  compileScss();
   compileJs();
 }
 exports.default = defaultTask;
