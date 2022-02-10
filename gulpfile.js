@@ -41,11 +41,9 @@ const webpackConfig               = require('./webpack.config');
   SRC_SLIM: 'src/slim/**/*.slim',
   SRC_SASS: 'src/assets/scss/**/*.scss',
   SRC_JS:   'src/assets/js/**/*.js',
-  // SRC_IMG:  'src/assets/img/**/*',
   OUT_SLIM: 'dist/',
   OUT_CSS:  'dist/assets/css',
   OUT_JS:   'dist/assets/js',
-  // OUT_IMG:  'dist/assets/img',
 };
 
 /**
