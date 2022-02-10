@@ -20,11 +20,13 @@ $ npx gulp bundle
 ### For Production
 
 ```javascript:gulpfile.js
+// gulpfile.js
 // true -> false
 src(GULP_PATHS.SRC_SASS, { sourcemaps: false  /* init */})
 ```
 
 ```javascript:webpack.config.js
+// webpack.config.js
 // development -> production
 mode: "production",
 ```
